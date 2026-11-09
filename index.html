@@ -113,6 +113,83 @@ body.menu #mnav{clip-path:inset(0 0 0 0)}
 #mnav a{font-size:40px;font-weight:800;line-height:1.3}
 #mnav .mono{font-size:12px;color:var(--dim);margin-top:24px}
 
+
+/* ---------- what is editing (4 interactive 3D stages) ---------- */
+.ed4{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,4vw,56px) clamp(20px,3vw,40px)}
+.edc{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.edc.in{opacity:1;transform:none}
+.edc:nth-child(2n){transition-delay:.12s}
+.edc .stage{position:relative;aspect-ratio:16/10;perspective:1100px;border-radius:18px;overflow:hidden;direction:ltr;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;
+  background:radial-gradient(ellipse at 50% 35%,rgba(255,255,255,.07),transparent 70%),var(--bg3);border:1px solid var(--line)}
+.edc .stage.drag{cursor:grabbing}
+.edc .obj{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.edc .stage.drag .obj,.edc .stage.live .obj{transition:none}
+.edc img{display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.edt{display:flex;gap:18px;margin-top:22px;align-items:baseline}
+.edt b{font-size:14px;color:var(--mg)}
+.edt h4{font-size:clamp(20px,1.8vw,26px);font-weight:700;margin-bottom:6px}
+.edt p{color:var(--mute);font-size:16px;max-width:460px}
+/* cut */
+.cut-mon,.edc[data-k=cut] .mon{position:absolute;left:17%;right:17%;top:6%;aspect-ratio:16/9;border-radius:8px;overflow:hidden;transform:translateZ(30px);box-shadow:0 24px 50px rgba(0,0,0,.55);background:#000}
+.edc[data-k=cut] .tc{position:absolute;top:8px;left:10px;font-size:11px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.edc[data-k=cut] .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.edc[data-k=cut] .flash.go{animation:cutflash .25s ease-out}
+@keyframes cutflash{from{opacity:.35}to{opacity:0}}
+.edc[data-k=cut] .tlw{position:absolute;left:5%;right:5%;bottom:5%;height:34%;transform:rotateX(46deg);transform-origin:50% 100%;transform-style:preserve-3d}
+.edc[data-k=cut] .rul{position:absolute;left:0;right:0;top:0;height:16%;background:repeating-linear-gradient(90deg,rgba(255,255,255,.35) 0 1px,transparent 1px 5%);opacity:.6}
+.edc[data-k=cut] .trk{position:absolute;inset:20% 0 0;display:flex;gap:3px}
+.edc[data-k=cut] .c{flex:none;height:100%;border-radius:5px;overflow:hidden;border:1px solid rgba(255,255,255,.18);filter:brightness(.6);transition:filter .25s,box-shadow .25s}
+.edc[data-k=cut] .c.on{filter:none;box-shadow:0 0 0 2px var(--accent)}
+.edc[data-k=cut] .ph{position:absolute;top:0;bottom:-4%;left:0;width:2px;margin-left:-1px;background:var(--rec);transform:translateZ(4px)}
+.edc[data-k=cut] .ph::before{content:"";position:absolute;top:-2px;left:-6px;border:7px solid transparent;border-top:9px solid var(--rec)}
+/* grade */
+.edc[data-k=grade] .pic{position:absolute;inset:9% 9%;border-radius:10px;overflow:hidden;box-shadow:0 26px 50px rgba(0,0,0,.55);transform:translateZ(20px);--w:50%}
+.edc[data-k=grade] .log{filter:saturate(.55) contrast(.74) brightness(1.08)}
+.edc[data-k=grade] .after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--w))}
+.edc[data-k=grade] .after img{filter:saturate(1.15) contrast(1.05)}
+.edc[data-k=grade] .tag{position:absolute;top:10px;font-size:11px;padding:3px 8px;border-radius:4px;background:rgba(0,0,0,.55);color:#fff}
+.edc[data-k=grade] .tag.l{left:10px}.edc[data-k=grade] .tag.r{right:10px;background:var(--mg);color:#000}
+.edc[data-k=grade] .hdl{position:absolute;top:0;bottom:0;left:var(--w);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 12px rgba(0,0,0,.5)}
+.edc[data-k=grade] .hdl i{position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+.edc[data-k=grade] .hdl i::before,.edc[data-k=grade] .hdl i::after{content:"";position:absolute;top:50%;margin-top:-5px;border:5px solid transparent}
+.edc[data-k=grade] .hdl i::before{left:4px;border-right:6px solid #222}.edc[data-k=grade] .hdl i::after{right:4px;border-left:6px solid #222}
+.edc[data-k=grade] .wheels{position:absolute;right:4%;bottom:5%;display:flex;gap:6px;transform:translateZ(70px) rotateX(18deg)}
+.edc[data-k=grade] .wheels i{position:relative;width:clamp(26px,3vw,40px);aspect-ratio:1;border-radius:50%;background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);box-shadow:0 6px 16px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.8)}
+.edc[data-k=grade] .wheels i::after{content:"";position:absolute;width:22%;height:22%;border-radius:50%;background:#fff;border:1px solid #000;left:39%;top:39%;transform:translate(var(--dx,0),var(--dy,0))}
+/* angle */
+.edc[data-k=angle] .cube{position:absolute;left:50%;top:46%;width:62%;aspect-ratio:16/9;transform-style:preserve-3d;transform:translate(-50%,-50%) translateZ(calc(var(--d,200px)*-1)) rotateY(var(--a,0deg))}
+.edc[data-k=angle] .f{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.edc[data-k=angle] .f:nth-child(1){transform:rotateY(0deg) translateZ(var(--d,200px))}
+.edc[data-k=angle] .f:nth-child(2){transform:rotateY(120deg) translateZ(var(--d,200px))}
+.edc[data-k=angle] .f:nth-child(3){transform:rotateY(240deg) translateZ(var(--d,200px))}
+.edc[data-k=angle] .f span{position:absolute;top:8px;left:8px;font-size:11px;padding:2px 7px;border-radius:4px;background:var(--rec);color:#fff}
+.edc[data-k=angle] .cams{position:absolute;left:50%;bottom:6%;transform:translateX(-50%);display:flex;gap:8px;z-index:2}
+.edc[data-k=angle] .cams button{width:36px;height:30px;border-radius:6px;border:1px solid var(--line2);background:rgba(0,0,0,.45);color:var(--mute);font:inherit;font-size:13px;cursor:pointer;transition:.25s}
+.edc[data-k=angle] .cams button.on{background:var(--rec);border-color:var(--rec);color:#fff}
+/* gfx */
+.edc[data-k=gfx] .obj{--e:1;transform:rotateY(calc(var(--e)*-30deg)) rotateX(calc(var(--e)*16deg)) scale(calc(1 - var(--e)*.16))}
+.edc[data-k=gfx] .ly{position:absolute;inset:9%;border-radius:10px;transform:translateZ(calc(var(--e)*var(--z)));
+  outline:1px dashed rgba(255,255,255,calc(var(--e)*.55));outline-offset:-1px}
+.edc[data-k=gfx] .l0{--z:0px;overflow:hidden;box-shadow:0 24px 50px rgba(0,0,0,.5)}
+.edc[data-k=gfx] .l1{--z:90px}.edc[data-k=gfx] .l2{--z:180px}
+.edc[data-k=gfx] .l0 img{transform:scale(1.14);transform-origin:50% 0}
+.edc[data-k=gfx] .ly:not(.l0){background:rgba(255,255,255,calc(var(--e)*.04))}
+.edc[data-k=gfx] .nm{position:absolute;bottom:-20px;left:0;font-size:10px;color:var(--mute);opacity:var(--e)}
+.edc[data-k=gfx] .l0 .nm{bottom:6px;left:8px;color:#fff}
+.edc[data-k=gfx] .yt{position:absolute;top:3%;right:4%;display:flex;align-items:baseline;gap:.25em;direction:rtl;font-weight:800;line-height:1}
+.edc[data-k=gfx] .yt .n{font-size:clamp(30px,4.6vw,66px);color:#1f5f99;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.edc[data-k=gfx] .yt span{font-size:clamp(13px,1.7vw,24px);color:#d9a441;font-weight:700}
+.edc[data-k=gfx] .tag{position:absolute;right:4%;top:60%;width:40%;direction:rtl;display:flex;flex-direction:column;gap:3px}
+.edc[data-k=gfx] .tag b,.edc[data-k=gfx] .tag i{display:block;font-style:normal;color:#fff;background:#1f5f99;border:1px solid rgba(255,255,255,.55);padding:.28em .6em;font-size:clamp(10px,1.15vw,16px);font-weight:600}
+.edc[data-k=gfx] .tag i{width:70%;margin-right:0;font-weight:400}
+.edc[data-k=gfx] .stage.play .tag b{animation:tagwipe 6s var(--ease) infinite}
+.edc[data-k=gfx] .stage.play .tag i{animation:tagwipe 6s var(--ease) .25s infinite}
+.edc[data-k=gfx] .stage.play .yt{animation:ytin 6s var(--ease) infinite}
+@keyframes tagwipe{0%{clip-path:inset(0 0 0 100%)}10%,78%{clip-path:inset(0 0 0 0)}88%,100%{clip-path:inset(0 100% 0 0)}}
+@keyframes ytin{0%{opacity:0;transform:translateY(-14px)}9%,80%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateY(-8px)}}
+@media (max-width:860px){.ed4{grid-template-columns:1fr}}
+@media (max-width:640px){.edt{gap:12px}.edt p{font-size:15px}.edc[data-k=angle] .cams button{width:32px;height:28px}}
+
 /* ---------- hero ---------- */
 .hero{position:relative;height:100svh;min-height:560px;overflow:hidden;background:#000}
 .hero video,.hero .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -652,11 +729,69 @@ footer img{height:36px;filter:invert(1);opacity:.85}
 </section>
 
 <!-- PROCESS -->
+<!-- WHAT IS EDITING -->
+<section class="sec" id="editing" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead io">
+      <div>
+        <div class="slate mono"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 03 · עריכה</div>
+        <h2 class="reveal-txt"><span style="display:block">אז מה זה</span><span style="display:block"><em>עריכת וידאו?</em></span></h2>
+      </div>
+      <p>עריכה היא הרבה יותר מחיתוך. אלה ארבעה מהשלבים שכל סרטון עובר אצלי.</p>
+    </div>
+    <div class="ed4">
+      <article class="edc io" data-k="cut">
+        <div class="stage" aria-label="הדגמה: חיתוך וקצב">
+          <div class="obj">
+            <div class="mon"><img src="media/edit/cut-1.jpg" alt=""><span class="tc mono">00:00:00:00</span><i class="flash"></i></div>
+            <div class="tlw"><div class="rul"></div><div class="trk"><div class="c" style="width:14%"><img src="media/edit/cut-1.jpg" alt="" loading="lazy" decoding="async"></div><div class="c" style="width:19%"><img src="media/edit/cut-2.jpg" alt="" loading="lazy" decoding="async"></div><div class="c" style="width:12%"><img src="media/edit/cut-3.jpg" alt="" loading="lazy" decoding="async"></div><div class="c" style="width:21%"><img src="media/edit/cut-4.jpg" alt="" loading="lazy" decoding="async"></div><div class="c" style="width:17%"><img src="media/edit/cut-5.jpg" alt="" loading="lazy" decoding="async"></div><div class="c" style="width:17%"><img src="media/edit/cut-6.jpg" alt="" loading="lazy" decoding="async"></div></div><div class="ph"></div></div>
+          </div>
+        </div>
+        <div class="edt"><b class="mono">01</b><div><h4>חיתוך וקצב</h4><p>מתוך שעות של חומר אני בוחר את הרגעים הנכונים ובונה מהם סיפור עם קצב.</p></div></div>
+      </article>
+      <article class="edc io" data-k="grade">
+        <div class="stage" aria-label="הדגמה: שיפור צבעים">
+          <div class="obj">
+            <div class="pic"><img class="log" src="media/edit/grade.jpg" alt=""><div class="after"><img src="media/edit/grade.jpg" alt=""></div>
+              <span class="tag l mono">LOG</span><span class="tag r mono">GRADED</span>
+              <div class="hdl"><i></i></div></div>
+            <div class="wheels"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="edt"><b class="mono">02</b><div><h4>שיפור צבעים</h4><p>אני לוקח צילום שטוח ונותן לו עומק, חום ואווירה שמתאימים לסיפור.</p></div></div>
+      </article>
+      <article class="edc io" data-k="angle">
+        <div class="stage" aria-label="הדגמה: זוויות צילום">
+          <div class="obj">
+            <div class="cube">
+              <div class="f"><img src="media/edit/angle-1.jpg" alt="" loading="lazy"><span class="mono">CAM A</span></div>
+              <div class="f"><img src="media/edit/angle-2.jpg" alt="" loading="lazy"><span class="mono">CAM B</span></div>
+              <div class="f"><img src="media/edit/angle-3.jpg" alt="" loading="lazy"><span class="mono">CAM C</span></div>
+            </div>
+          </div>
+          <div class="cams mono"><button type="button">A</button><button type="button">B</button><button type="button">C</button></div>
+        </div>
+        <div class="edt"><b class="mono">03</b><div><h4>זוויות צילום</h4><p>כשמצלמים בכמה זוויות, בעריכה אני בוחר בכל רגע את הזווית הכי חזקה.</p></div></div>
+      </article>
+      <article class="edc io" data-k="gfx">
+        <div class="stage" aria-label="הדגמה: גרפיקה וכתוביות">
+          <div class="obj">
+            <div class="ly l0"><img src="media/edit/gfx.jpg" alt="" loading="lazy"><span class="nm mono">FOOTAGE</span></div>
+            <div class="ly l1"><div class="yt"><b class="n">14</b><span>שנות פעילות</span></div><span class="nm mono">TITLE</span></div>
+            <div class="ly l2"><div class="tag"><b>הרב אפרים ג׳יאמי</b><i>ראש הישיבה</i></div><span class="nm mono">NAME TAG</span></div>
+          </div>
+        </div>
+        <div class="edt"><b class="mono">04</b><div><h4>גרפיקה וכתוביות</h4><p>כותרות, תגיות שם וכתוביות שאני מעצב ומנפיש בשכבות, כדי לתת מידע בלי להעמיס.</p></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="process" style="padding-top:0">
   <div class="wrap">
     <div class="shead io">
       <div>
-        <div class="slate mono"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 03 · תהליך עבודה</div>
+        <div class="slate mono"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 04 · תהליך עבודה</div>
         <h2 class="reveal-txt"><span style="display:block">מהרעיון <em>למסך</em></span></h2>
       </div>
       <p>כל פרויקט עובר אצלי את אותו ציר עבודה מסודר, כדי שתדעו בכל שלב מה קורה ומתי מגיע התוצר.</p>
@@ -696,7 +831,7 @@ footer img{height:36px;filter:invert(1);opacity:.85}
 <section class="sec" id="about" style="padding-top:0">
   <div class="wrap about">
     <div>
-      <div class="slate mono io"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 04 · אודות</div>
+      <div class="slate mono io"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 05 · אודות</div>
       <p class="big" id="aboutBig">אני ידידיה, צלם ועורך וידאו. אני מלווה עמותות, מוסדות חינוך, קהילות, עסקים ואמנים, ועוזר להם לספר את הסיפור שלהם בצורה ברורה, מרגשת ומקצועית.</p>
     </div>
     <div class="side">
@@ -709,7 +844,7 @@ footer img{height:36px;filter:invert(1);opacity:.85}
 <!-- CONTACT -->
 <section class="contact io" id="contact">
   <div class="wrap">
-    <div class="slate mono"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 05 · צור קשר</div>
+    <div class="slate mono"><svg class="clap" viewBox="0 0 30 26"><rect x="1" y="9" width="28" height="16" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><g class="stick"><rect x="1" y="3" width="28" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M7 3l-3 5M14 3l-3 5M21 3l-3 5M28 3l-3 5" stroke="currentColor" stroke-width="1.4"/></g></svg>SCENE 06 · צור קשר</div>
     <h2><span class="ln"><span>יש לכם סיפור?</span></span><span class="ln"><span>בואו נצלם אותו.</span></span></h2>
     <p class="lead">ספרו לי בכמה מילים על הפרויקט, ואחזור אליכם עם רעיון והצעת מחיר.</p>
     <div class="cta">
@@ -939,6 +1074,72 @@ addEventListener("resize",onScroll);
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
+})();
+
+
+/* ============ WHAT IS EDITING: scroll + drag driven 3D stages ============ */
+(function(){
+  const cards=$$(".edc[data-k]");if(!cards.length)return;
+  const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+  const tc=f=>{const s=Math.floor(f/25);return "00:00:"+String(s).padStart(2,"0")+":"+String(f%25).padStart(2,"0")};
+  const S=cards.map(el=>({el,k:el.dataset.k,st:el.querySelector(".stage"),obj:el.querySelector(".obj"),p:0,manual:false,vis:false,tx:0,ty:0}));
+  // per-card renderers
+  const R={
+    cut(c){
+      if(!c.init){c.clips=[...c.el.querySelectorAll(".c")];c.mon=c.el.querySelector(".mon img");c.tcel=c.el.querySelector(".tc");c.flash=c.el.querySelector(".flash");c.phel=c.el.querySelector(".ph");c.cur=-1;c.init=1}
+      const x=c.p*100;c.phel.style.left=x+"%";
+      let acc=0,idx=0;c.clips.forEach((el,i)=>{const w=parseFloat(el.style.width);if(x>=acc)idx=i;acc+=w});
+      if(idx!==c.cur){c.clips.forEach((el,i)=>el.classList.toggle("on",i===idx));c.mon.src=c.clips[idx].querySelector("img").src;if(c.cur>=0){c.flash.classList.remove("go");void c.flash.offsetWidth;c.flash.classList.add("go")}c.cur=idx}
+      c.tcel.textContent=tc(Math.round(c.p*24*25));
+      c.obj.style.transform=`rotateX(${(8-c.ty*6).toFixed(2)}deg) rotateY(${(c.tx*10).toFixed(2)}deg)`;
+    },
+    grade(c){
+      if(!c.init){c.pic=c.el.querySelector(".pic");c.wh=[...c.el.querySelectorAll(".wheels i")];c.init=1}
+      c.pic.style.setProperty("--w",((1-c.p)*100).toFixed(2)+"%");
+      const d=[[-.18,.12],[.15,-.1],[.05,.2]];c.wh.forEach((w,i)=>{w.style.setProperty("--dx",(d[i][0]*c.p*100).toFixed(1)+"%");w.style.setProperty("--dy",(d[i][1]*c.p*100).toFixed(1)+"%")});
+      c.obj.style.transform=`rotateY(${(-14+c.p*14+c.tx*10).toFixed(2)}deg) rotateX(${(6-c.ty*8).toFixed(2)}deg)`;
+    },
+    angle(c){
+      if(!c.init){c.cube=c.el.querySelector(".cube");c.btn=[...c.el.querySelectorAll(".cams button")];
+        c.btn.forEach((b,i)=>b.addEventListener("click",()=>{c.manual=true;c.goal=i/2;anim(c)}));c.init=1}
+      c.cube.style.setProperty("--d",(c.cube.offsetWidth*.2887).toFixed(1)+"px");
+      c.cube.style.setProperty("--a",(-c.p*240).toFixed(2)+"deg");
+      const on=Math.round(c.p*2);c.btn.forEach((b,i)=>b.classList.toggle("on",i===on));
+      c.obj.style.transform=`rotateX(${(-4-c.ty*8).toFixed(2)}deg) rotateY(${(c.tx*8).toFixed(2)}deg)`;
+    },
+    gfx(c){
+      if(!c.init){c.num=c.el.querySelector(".yt .n");c.yt=c.el.querySelector(".yt");
+        c.yt.addEventListener("animationstart",()=>count(c));c.yt.addEventListener("animationiteration",()=>count(c));c.init=1}
+      const play=c.p>.97&&!c.st.classList.contains("drag")&&!RM;
+      if(play!==c.playing){c.st.classList.toggle("play",play);c.playing=play;if(!play){clearInterval(c.ci);c.num.textContent="14"}}
+      c.obj.style.setProperty("--e",(1-c.p).toFixed(3));
+      c.obj.style.transform=`rotateY(calc(var(--e)*-30deg + ${(c.tx*10).toFixed(2)}deg)) rotateX(calc(var(--e)*16deg + ${(-c.ty*8).toFixed(2)}deg)) scale(calc(1 - var(--e)*.16))`;
+    }
+  };
+  const draw=c=>R[c.k](c);
+  function count(c){clearInterval(c.ci);let n=0;c.num.textContent="0";c.ci=setInterval(()=>{n++;c.num.textContent=n;if(n>=14)clearInterval(c.ci)},55)}
+  // smooth tween toward goal (used for clicks + snapping)
+  function anim(c){if(c.raf)cancelAnimationFrame(c.raf);(function step(){c.p+= (c.goal-c.p)*.14;if(Math.abs(c.goal-c.p)<.002)c.p=c.goal;draw(c);if(c.p!==c.goal)c.raf=requestAnimationFrame(step)})()}
+  // scroll drives progress while not manually controlled
+  function onScroll(){const vh=innerHeight;S.forEach(c=>{if(!c.vis||c.manual)return;const r=c.st.getBoundingClientRect();
+    const g=clamp((vh*.92-r.top)/(vh*.62));c.goal=c.k==="angle"?Math.round(g*2*4)/8:c.k==="grade"?.06+g*.56:g;if(RM){c.p=c.goal;draw(c)}else anim(c)})}
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{const c=S.find(x=>x.st===e.target);c.vis=e.isIntersecting;if(!c.vis){c.manual=false}else{draw(c);onScroll()}}),{rootMargin:"60px"});
+  S.forEach(c=>{io2.observe(c.st);draw(c)});
+  addEventListener("scroll",onScroll,{passive:true});addEventListener("resize",()=>S.forEach(c=>c.vis&&draw(c)));
+  // dragging (horizontal); vertical swipes still scroll the page on touch
+  S.forEach(c=>{
+    let sx=0,sp=0,dragging=false;
+    c.st.addEventListener("pointerdown",e=>{if(e.target.closest("button"))return;dragging=true;sx=e.clientX;sp=c.p;c.manual=true;c.st.classList.add("drag");
+      if(c.k==="grade"||c.k==="cut"){const r=(c.k==="cut"?c.el.querySelector(".tlw"):c.el.querySelector(".pic")).getBoundingClientRect();if(e.clientY>r.top-20){c.goal=clamp((c.k==="grade"?1-(e.clientX-r.left)/r.width:(e.clientX-r.left)/r.width));anim(c);sp=c.goal;sx=e.clientX}}
+      try{c.st.setPointerCapture(e.pointerId)}catch(_){}});
+    c.st.addEventListener("pointermove",e=>{const r=c.st.getBoundingClientRect();
+      if(!dragging){if(e.pointerType==="mouse"){c.tx=(e.clientX-r.left)/r.width-.5;c.ty=(e.clientY-r.top)/r.height-.5;c.st.classList.add("live");draw(c)}return}
+      if(c.k==="grade"||c.k==="cut"){const t=(c.k==="cut"?c.el.querySelector(".tlw"):c.el.querySelector(".pic")).getBoundingClientRect();const x=clamp((e.clientX-t.left)/t.width);c.p=c.k==="grade"?1-x:x}
+      else{let d=(e.clientX-sx)/r.width;if(c.k==="angle")d=d*-1.2;c.p=clamp(sp+d*1.4)}c.goal=c.p;if(c.raf)cancelAnimationFrame(c.raf);draw(c)});
+    const end=()=>{if(!dragging)return;dragging=false;c.st.classList.remove("drag");if(c.k==="angle"){c.goal=Math.round(c.p*2)/2;anim(c)}};
+    c.st.addEventListener("pointerup",end);c.st.addEventListener("pointercancel",end);
+    c.st.addEventListener("pointerleave",()=>{c.tx=c.ty=0;c.st.classList.remove("live");draw(c)});
+  });
 })();
 
 /* ============ MOTION GRAPHICS ============ */
