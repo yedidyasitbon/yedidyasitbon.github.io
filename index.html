@@ -143,7 +143,7 @@ body.menu #mnav{clip-path:inset(0 0 0 0)}
 .edc[data-k=cut] .ph{position:absolute;top:0;bottom:-4%;left:0;width:2px;margin-left:-1px;background:var(--rec);transform:translateZ(4px)}
 .edc[data-k=cut] .ph::before{content:"";position:absolute;top:-2px;left:-6px;border:7px solid transparent;border-top:9px solid var(--rec)}
 /* grade */
-.edc[data-k=grade] .pic{position:absolute;inset:9% 9%;border-radius:10px;overflow:hidden;box-shadow:0 26px 50px rgba(0,0,0,.55);transform:translateZ(20px);--w:50%}
+.edc[data-k=grade] .pic{position:absolute;inset:5% 13% 32% 13%;border-radius:10px;overflow:hidden;box-shadow:0 26px 50px rgba(0,0,0,.55);transform:translateZ(20px);--w:50%}
 .edc[data-k=grade] .log{filter:saturate(.55) contrast(.74) brightness(1.08)}
 .edc[data-k=grade] .after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--w))}
 .edc[data-k=grade] .after img{filter:saturate(1.15) contrast(1.05)}
@@ -153,9 +153,16 @@ body.menu #mnav{clip-path:inset(0 0 0 0)}
 .edc[data-k=grade] .hdl i{position:absolute;top:50%;left:50%;width:34px;height:34px;margin:-17px 0 0 -17px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.4)}
 .edc[data-k=grade] .hdl i::before,.edc[data-k=grade] .hdl i::after{content:"";position:absolute;top:50%;margin-top:-5px;border:5px solid transparent}
 .edc[data-k=grade] .hdl i::before{left:4px;border-right:6px solid #222}.edc[data-k=grade] .hdl i::after{right:4px;border-left:6px solid #222}
-.edc[data-k=grade] .wheels{position:absolute;right:4%;bottom:5%;display:flex;gap:6px;transform:translateZ(70px) rotateX(18deg)}
-.edc[data-k=grade] .wheels i{position:relative;width:clamp(26px,3vw,40px);aspect-ratio:1;border-radius:50%;background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);box-shadow:0 6px 16px rgba(0,0,0,.5);border:2px solid rgba(255,255,255,.8)}
-.edc[data-k=grade] .wheels i::after{content:"";position:absolute;width:22%;height:22%;border-radius:50%;background:#fff;border:1px solid #000;left:39%;top:39%;transform:translate(var(--dx,0),var(--dy,0))}
+.edc[data-k=grade] .cp{position:absolute;left:11%;right:11%;bottom:3%;height:31%;transform:rotateX(50deg) translateZ(8px);transform-origin:50% 100%;
+  display:flex;justify-content:space-around;align-items:center;padding:0 4% 0 3%;border-radius:12px;
+  background:linear-gradient(180deg,#2c3230,#121615);border:1px solid rgba(255,255,255,.14);box-shadow:0 24px 34px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.1)}
+.edc[data-k=grade] .tb{position:relative;height:82%;aspect-ratio:1}
+.edc[data-k=grade] .tb .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from var(--r,0deg),#ff4d4d,#ffd23f,#3ddc84,#2ec4d6,#4d6bff,#d94dff,#ff4d4d);
+  -webkit-mask:radial-gradient(circle,transparent 60%,#000 61%);mask:radial-gradient(circle,transparent 60%,#000 61%);opacity:.9}
+.edc[data-k=grade] .tb .ball{position:absolute;inset:17%;border-radius:50%;background:radial-gradient(circle at var(--hx,38%) var(--hy,32%),#8a8f93,#26292b 55%,#0d0f10 100%);box-shadow:inset 0 -4px 8px rgba(0,0,0,.7),0 3px 6px rgba(0,0,0,.6)}
+.edc[data-k=grade] .tb .dot{position:absolute;left:50%;top:50%;width:18%;height:18%;margin:-9% 0 0 -9%;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.9);transform:translate(var(--dx,0),var(--dy,0))}
+.edc[data-k=grade] .kn{display:flex;flex-direction:column;gap:12%;height:70%;justify-content:center}
+.edc[data-k=grade] .kn i{display:block;width:clamp(12px,1.5vw,20px);aspect-ratio:1;border-radius:50%;background:conic-gradient(from var(--k,0deg),#e8e8e8 0 8%,#3a3f3d 8% 100%);border:1px solid rgba(255,255,255,.25)}
 /* angle */
 .edc[data-k=angle] .cube{position:absolute;left:50%;top:46%;width:62%;aspect-ratio:16/9;transform-style:preserve-3d;transform:translate(-50%,-50%) translateZ(calc(var(--d,200px)*-1)) rotateY(var(--a,0deg))}
 .edc[data-k=angle] .f{position:absolute;inset:0;border-radius:8px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
@@ -182,11 +189,11 @@ body.menu #mnav{clip-path:inset(0 0 0 0)}
 .edc[data-k=gfx] .tag{position:absolute;right:4%;top:60%;width:40%;direction:rtl;display:flex;flex-direction:column;gap:3px}
 .edc[data-k=gfx] .tag b,.edc[data-k=gfx] .tag i{display:block;font-style:normal;color:#fff;background:#1f5f99;border:1px solid rgba(255,255,255,.55);padding:.28em .6em;font-size:clamp(10px,1.15vw,16px);font-weight:600}
 .edc[data-k=gfx] .tag i{width:70%;margin-right:0;font-weight:400}
-.edc[data-k=gfx] .stage.play .tag b{animation:tagwipe 6s var(--ease) infinite}
-.edc[data-k=gfx] .stage.play .tag i{animation:tagwipe 6s var(--ease) .25s infinite}
-.edc[data-k=gfx] .stage.play .yt{animation:ytin 6s var(--ease) infinite}
-@keyframes tagwipe{0%{clip-path:inset(0 0 0 100%)}10%,78%{clip-path:inset(0 0 0 0)}88%,100%{clip-path:inset(0 100% 0 0)}}
-@keyframes ytin{0%{opacity:0;transform:translateY(-14px)}9%,80%{opacity:1;transform:none}90%,100%{opacity:0;transform:translateY(-8px)}}
+.edc[data-k=gfx] .stage.play .tag b{animation:tagwipe 10s var(--ease) .8s infinite both}
+.edc[data-k=gfx] .stage.play .tag i{animation:tagwipe 10s var(--ease) 1.3s infinite both}
+.edc[data-k=gfx] .stage.play .yt{animation:ytin 10s var(--ease) infinite both}
+@keyframes tagwipe{0%{clip-path:inset(0 0 0 100%)}14%,80%{clip-path:inset(0 0 0 0)}94%,100%{clip-path:inset(0 100% 0 0)}}
+@keyframes ytin{0%{opacity:0;transform:translateY(-14px)}12%,82%{opacity:1;transform:none}95%,100%{opacity:0;transform:translateY(-8px)}}
 @media (max-width:860px){.ed4{grid-template-columns:1fr}}
 @media (max-width:640px){.edt{gap:12px}.edt p{font-size:15px}.edc[data-k=angle] .cams button{width:32px;height:28px}}
 
@@ -755,7 +762,7 @@ footer img{height:36px;filter:invert(1);opacity:.85}
             <div class="pic"><img class="log" src="media/edit/grade.jpg" alt=""><div class="after"><img src="media/edit/grade.jpg" alt=""></div>
               <span class="tag l mono">LOG</span><span class="tag r mono">GRADED</span>
               <div class="hdl"><i></i></div></div>
-            <div class="wheels"><i></i><i></i><i></i></div>
+            <div class="cp"><div class="tb"><i class="ring"></i><i class="ball"><b class="dot"></b></i></div><div class="tb"><i class="ring"></i><i class="ball"><b class="dot"></b></i></div><div class="tb"><i class="ring"></i><i class="ball"><b class="dot"></b></i></div><div class="kn"><i></i><i></i></div></div>
           </div>
         </div>
         <div class="edt"><b class="mono">02</b><div><h4>שיפור צבעים</h4><p>אני לוקח צילום שטוח ונותן לו עומק, חום ואווירה שמתאימים לסיפור.</p></div></div>
@@ -1094,9 +1101,16 @@ addEventListener("resize",onScroll);
       c.obj.style.transform=`rotateX(${(8-c.ty*6).toFixed(2)}deg) rotateY(${(c.tx*10).toFixed(2)}deg)`;
     },
     grade(c){
-      if(!c.init){c.pic=c.el.querySelector(".pic");c.wh=[...c.el.querySelectorAll(".wheels i")];c.init=1}
+      if(!c.init){c.pic=c.el.querySelector(".pic");c.tb=[...c.el.querySelectorAll(".tb")];c.kn=[...c.el.querySelectorAll(".kn i")];c.init=1;
+        (function loop(){if(c.vis&&!RM){c.t=performance.now();R.grade(c)}requestAnimationFrame(loop)})()}
       c.pic.style.setProperty("--w",((1-c.p)*100).toFixed(2)+"%");
-      const d=[[-.18,.12],[.15,-.1],[.05,.2]];c.wh.forEach((w,i)=>{w.style.setProperty("--dx",(d[i][0]*c.p*100).toFixed(1)+"%");w.style.setProperty("--dy",(d[i][1]*c.p*100).toFixed(1)+"%")});
+      const t=(c.t||0)/1000,d=[[-110,70],[90,-60],[40,110]];
+      c.tb.forEach((w,i)=>{const wx=Math.sin(t*.9+i*2.1)*35,wy=Math.cos(t*.7+i*1.3)*35,dx=d[i][0]*c.p+wx*(.4+c.p*.6),dy=d[i][1]*c.p+wy*(.4+c.p*.6);
+        const dot=w.querySelector(".dot"),ball=w.querySelector(".ball"),ring=w.querySelector(".ring");
+        dot.style.setProperty("--dx",dx.toFixed(1)+"%");dot.style.setProperty("--dy",dy.toFixed(1)+"%");
+        ball.style.setProperty("--hx",(38+dx*.12).toFixed(1)+"%");ball.style.setProperty("--hy",(32+dy*.12).toFixed(1)+"%");
+        ring.style.setProperty("--r",(c.p*140+i*50+Math.sin(t*.5+i)*25).toFixed(1)+"deg")});
+      c.kn.forEach((k,i)=>k.style.setProperty("--k",(c.p*200+i*90+Math.sin(t*.8+i)*40).toFixed(1)+"deg"));
       c.obj.style.transform=`rotateY(${(-14+c.p*14+c.tx*10).toFixed(2)}deg) rotateX(${(6-c.ty*8).toFixed(2)}deg)`;
     },
     angle(c){
@@ -1108,22 +1122,22 @@ addEventListener("resize",onScroll);
       c.obj.style.transform=`rotateX(${(-4-c.ty*8).toFixed(2)}deg) rotateY(${(c.tx*8).toFixed(2)}deg)`;
     },
     gfx(c){
-      if(!c.init){c.num=c.el.querySelector(".yt .n");c.yt=c.el.querySelector(".yt");
-        c.yt.addEventListener("animationstart",()=>count(c));c.yt.addEventListener("animationiteration",()=>count(c));c.init=1}
-      const play=c.p>.97&&!c.st.classList.contains("drag")&&!RM;
-      if(play!==c.playing){c.st.classList.toggle("play",play);c.playing=play;if(!play){clearInterval(c.ci);c.num.textContent="14"}}
+      if(!c.init){c.num=c.el.querySelector(".yt .n");c.yt=c.el.querySelector(".yt");const arm=()=>{if(!c.armed){c.armed=true;draw(c)}};c.st.addEventListener("pointerenter",arm);c.st.addEventListener("pointerdown",arm);
+        c.yt.addEventListener("animationiteration",()=>count(c));c.init=1}
+      const play=!!c.armed&&c.p>.97&&!c.st.classList.contains("drag");
+      if(play!==c.playing){c.st.classList.toggle("play",play);c.playing=play;if(!play){clearInterval(c.ci);c.num.textContent="14"}else count(c)}
       c.obj.style.setProperty("--e",(1-c.p).toFixed(3));
       c.obj.style.transform=`rotateY(calc(var(--e)*-30deg + ${(c.tx*10).toFixed(2)}deg)) rotateX(calc(var(--e)*16deg + ${(-c.ty*8).toFixed(2)}deg)) scale(calc(1 - var(--e)*.16))`;
     }
   };
   const draw=c=>R[c.k](c);
-  function count(c){clearInterval(c.ci);let n=0;c.num.textContent="0";c.ci=setInterval(()=>{n++;c.num.textContent=n;if(n>=14)clearInterval(c.ci)},55)}
+  function count(c){clearInterval(c.ci);let n=0;c.num.textContent="0";setTimeout(()=>{clearInterval(c.ci);c.ci=setInterval(()=>{n++;c.num.textContent=n;if(n>=14)clearInterval(c.ci)},120)},500)}
   // smooth tween toward goal (used for clicks + snapping)
   function anim(c){if(c.raf)cancelAnimationFrame(c.raf);(function step(){c.p+= (c.goal-c.p)*.14;if(Math.abs(c.goal-c.p)<.002)c.p=c.goal;draw(c);if(c.p!==c.goal)c.raf=requestAnimationFrame(step)})()}
   // scroll drives progress while not manually controlled
   function onScroll(){const vh=innerHeight;S.forEach(c=>{if(!c.vis||c.manual)return;const r=c.st.getBoundingClientRect();
     const g=clamp((vh*.92-r.top)/(vh*.62));c.goal=c.k==="angle"?Math.round(g*2*4)/8:c.k==="grade"?.06+g*.56:g;if(RM){c.p=c.goal;draw(c)}else anim(c)})}
-  const io2=new IntersectionObserver(es=>es.forEach(e=>{const c=S.find(x=>x.st===e.target);c.vis=e.isIntersecting;if(!c.vis){c.manual=false}else{draw(c);onScroll()}}),{rootMargin:"60px"});
+  const io2=new IntersectionObserver(es=>es.forEach(e=>{const c=S.find(x=>x.st===e.target);c.vis=e.isIntersecting;if(!c.vis){c.manual=false;c.armed=false}else{draw(c);onScroll()}}),{rootMargin:"60px"});
   S.forEach(c=>{io2.observe(c.st);draw(c)});
   addEventListener("scroll",onScroll,{passive:true});addEventListener("resize",()=>S.forEach(c=>c.vis&&draw(c)));
   // dragging (horizontal); vertical swipes still scroll the page on touch
