@@ -938,7 +938,7 @@ const horiz=P.filter(p=>p.cat!=="vertical"), vert=P.filter(p=>p.cat==="vertical"
 const counts={};P.forEach(p=>counts[p.cat]=(counts[p.cat]||0)+1);
 const pad=n=>String(n).padStart(2,"0");
 const LAYOUT={1:["full"],2:["w","w"],3:["xl","",""],4:["w","w","w","w"],5:["xl","","","",""],6:["xl","","","xl","w","w"]};
-$("#catwords").innerHTML=Object.entries(CATS).map(([k,v])=>`<a href="#${k==="vertical"?"vertical":"cat-"+k}" data-k="${k}">${v}<sup>${pad(counts[k]||0)}</sup></a>`).join("");
+$("#catwords").innerHTML=Object.entries(CATS).map(([k,v],i)=>`<a href="#${k==="vertical"?"vertical":"cat-"+k}" data-k="${k}"><sup>${pad(i+1)}</sup>${v}</a>`).join("");
 const cardHTML=(p,i,size)=>`<article class="card ${size} ${p.cat==="ai"?"aicard":""} io" data-id="${p.id}" data-cat="${p.cat}" tabindex="0" aria-label="${p.t} – צפייה">
   <div class="frame">
     <img src="media/posters/${p.id}.jpg" alt="${p.t}" loading="${i<2?"eager":"lazy"}" decoding="async">
